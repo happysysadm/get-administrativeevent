@@ -95,8 +95,10 @@ happysysadm.com
 
                         try { 
                 
-                            $sysevents = Get-EventLog -ComputerName $Computer -LogName system -Newest 1000 -EntryType Error -ErrorAction Stop | `
-                                            ? TimeGenerated -gt $starttime | `
+                            $sysevents = Get-EventLog -ComputerName $Computer -LogName system -Newest 1000 -EntryType Error -ErrorAction Stop | `
+
+                                            ? TimeGenerated -gt $starttime | `
+                                            
                                             select MachineName,
                                             
                                                    @{Name='TimeCreated';Expression={$_.TimeGenerated}},
