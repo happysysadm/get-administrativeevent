@@ -162,10 +162,11 @@ happysysadm.com
                 $machineevents = $result | ? id -eq $id
 
                 $lastuniqueevents += $machineevents | sort timecreated -Descending | select -first 1
+				$lastuniqueevents | Add-Member -MemberType NoteProperty -Name "NumEvents" -Value ($machineevents | Measure).Count -Force
 
                 }
 
-            $AllResults += $lastuniqueevents
+            $AllResults += $lastuniqueevents | select MachineName, NumEvents, TimeCreated, ProviderName, LogName, Id, LevelDisplayName, Message
 
             }
     
